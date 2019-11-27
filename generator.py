@@ -90,7 +90,7 @@ def sample(preds, temperature=0.9):
 if __name__ == '__main__':
     seed = 'get very tired of the door bein the shap'
 
-    # ser = serial.Serial("/dev/cu.usbserial-A105A98D", 9600)
+    ser = serial.Serial("/dev/ttyAMA0", 9600)
     time.sleep(1)
 
     while True:
@@ -100,10 +100,10 @@ if __name__ == '__main__':
         generated = ' '.join(generated.split())
         generated = generated[40:]
         print(generated)
-        # ser.write(generated.encode('utf-8'))      # シリアルポートに出力
+        ser.write(generated.encode('utf-8'))      # シリアルポートに出力
 
         # seedを更新
         seed = generated[-40:]
 
-        time.sleep(5)
+        time.sleep(50)
         print()
