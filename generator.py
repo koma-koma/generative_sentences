@@ -13,7 +13,7 @@ import time
 import serial
 
 # 生成元の文章を読み込む
-path = './txt/alice.txt'
+path = './txt/entropy.txt'
 with io.open(path, encoding='utf-8') as f:
     text = f.read().lower()
 print('corpus length:', len(text))
@@ -41,9 +41,9 @@ for i, sentence in enumerate(sentences):
     y[i, char_indices[next_chars[i]]] = 1
 
 # モデルを読み込む
-model = model_from_json(open('./complete_model_epoch_30.json').read())
+model = model_from_json(open('./complete_model_epoch_60.json').read())
 # 学習結果を読み込む
-model.load_weights('./complete_model_epoch_30.h5')
+model.load_weights('./complete_model_epoch_60.h5')
 
 model.summary()
 
@@ -90,7 +90,7 @@ def sample(preds, temperature=0.9):
 if __name__ == '__main__':
     seed = 'get very tired of the door bein the shap'
 
-    ser = serial.Serial("/dev/cu.usbserial-A105A98D", 9600)
+    # ser = serial.Serial("/dev/cu.usbserial-A105A98D", 9600)
     time.sleep(1)
 
     while True:
@@ -100,10 +100,10 @@ if __name__ == '__main__':
         generated = ' '.join(generated.split())
         generated = generated[40:]
         print(generated)
-        ser.write(generated.encode('utf-8'))      # シリアルポートに出力
+        # ser.write(generated.encode('utf-8'))      # シリアルポートに出力
 
         # seedを更新
         seed = generated[-40:]
 
-        time.sleep(60)
+        time.sleep(5)
         print()

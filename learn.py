@@ -12,7 +12,7 @@ import io
 import os
 
 # 学習するテキストの読み込み
-path = './txt/alice.txt'
+path = './txt/entropy.txt'
 with io.open(path, encoding='utf-8') as f:
     text = f.read().lower()
 print('corpus length:', len(text))
@@ -103,7 +103,7 @@ print_callback = LambdaCallback(on_epoch_end=on_epoch_end)
 # 学習途中での出力を確かめたい場合は、callbacksにprint_calbackを追加する
 model.fit(x, y,
           batch_size=128,
-          epochs=30,
+          epochs=60,
           callbacks=[model_checkpoint])
 
 # 学習が完了したら、モデルと重さを保存する
